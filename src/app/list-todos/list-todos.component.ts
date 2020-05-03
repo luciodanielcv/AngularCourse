@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TodoDataService } from '../service/data/todo-data.service';
+import { Router } from '@angular/router';
 
 
 //LDCV Create a class for a single todo
@@ -35,7 +36,8 @@ export class ListTodosComponent implements OnInit {
   //   description: 'Learn to Dance'
   // }
 
-  constructor( private todoService:TodoDataService) { }
+  constructor( private todoService:TodoDataService,
+    private router: Router) { }
 
   ngOnInit(): void {
 
@@ -62,6 +64,11 @@ export class ListTodosComponent implements OnInit {
         this.refreshTodos();
       }
     )
+  }
+
+  updateTodo( id ){
+    console.log(`Update todo with id ${id}`)
+    this.router.navigate(['todos', id])
   }
 
 
