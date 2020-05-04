@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import{ HttpClient, HttpClientModule } from '@angular/common/http';
+import{ HttpClient, HttpClientModule, HttpHeaders } from '@angular/common/http';
 
 export class HelloWorldBean{
   constructor(public message: string ){}
@@ -15,12 +15,31 @@ export class WelcomeDataService {
     private http: HttpClient,
   ) { }
 
+  createBasicAuthenticationHttpHeader(){
+    let username = 'user'
+    let password= 'password'
+    let basicAuthHEaderString = 'Basic ' + window.btoa(username + ':' + password);
+    return basicAuthHEaderString;
+
+  }
+
   executeHelloWorldBeanService(){
     return this.http.get<HelloWorldBean>("http://localhost:8080/hello-world-bean")
   }
 
   executeHelloWorldBeanServiceWithPathVariable( name ){
-    return this.http.get<HelloWorldBean>(`http://localhost:8080/hello-world/path-variable/${name}`)
+    //return this.http.get<HelloWorldBean>(`http://localhost:8080/hello-world/path-variable/${name}`)
+    let basicAuthHeaderString = this.createBasicAuthenticationHttpHeader();
+    let headers = new HttpHeaders(
+      {
+        Authorization: basicAuthHeaderString
+      }
+    );
+
+
+    return this.http.get<HelloWorldBean>("http://localhost:8080/hello-world-bean", {
+      headers
+    });
   }
 
 

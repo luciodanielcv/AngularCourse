@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { HardcodedAuthenticationService } from '../service/hardcoded-authentication.service';
+import { BasicAuthenticationService } from '../service/basic-authentication.service';
 
 @Component({
   selector: 'app-login',
@@ -16,6 +17,7 @@ export class LoginComponent implements OnInit {
   //Router to welcome page
   //Dependency injection
   constructor(private router: Router,
+    private basicAuthenticationService: BasicAuthenticationService,
     private hardcodedAuthenticationService: HardcodedAuthenticationService
     ) { }
 
@@ -35,6 +37,26 @@ export class LoginComponent implements OnInit {
       this.invalidLogin = true
     }
 
+    
+  }
+
+  handleBasicAuthLogin(){
+
+    this.basicAuthenticationService.executeAuthenticationService(this.username, this.password).subscribe(
+      data => {
+          console.log( "login accepted" );
+      this.router.navigate(['welcome', this.username])
+      this.invalidLogin = false
+
+    },
+        error => {
+          console.log( "no login accepted" )
+          this.invalidLogin = true
+        }
+    )
+      
+      
+    
   }
 
   
