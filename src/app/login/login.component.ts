@@ -40,6 +40,30 @@ export class LoginComponent implements OnInit {
     
   }
 
+  
+
+  handleJwtAuthLogin(){
+
+    //console.log( 'Logging user: ' + this.username );
+    //console.log( 'With password: ' + this.password);
+    this.basicAuthenticationService.executeJwtAuthenticationService(this.username, this.password).subscribe(
+      data => {
+          console.log( data );
+      this.router.navigate(['welcome', this.username])
+      this.invalidLogin = false
+
+    },
+        error => {
+          console.log( error )
+          this.invalidLogin = true
+        }
+    )
+      
+      
+    
+  }
+
+
   handleBasicAuthLogin(){
 
     //console.log( 'Logging user: ' + this.username );
