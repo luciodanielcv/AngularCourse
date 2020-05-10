@@ -46,10 +46,11 @@ export class ListTodosComponent implements OnInit {
   }
 
   refreshTodos(){
-    this.todoService.retrieveAllTodos('UserHardCoded').subscribe(
+    this.todoService.retrieveAllTodos('in28minutes').subscribe(
       response=> {
-        console.log( response )
+        console.log( 'In refreshAll()' )
         this.todos = response
+        return response;
       }
     );
 

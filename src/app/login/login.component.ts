@@ -49,6 +49,7 @@ export class LoginComponent implements OnInit {
     this.basicAuthenticationService.executeJwtAuthenticationService(this.username, this.password).subscribe(
       data => {
           console.log( data );
+          console.log( "LDCV the username: " + this.username);
       this.router.navigate(['welcome', this.username])
       this.invalidLogin = false
 
@@ -64,26 +65,26 @@ export class LoginComponent implements OnInit {
   }
 
 
-  handleBasicAuthLogin(){
+  // handleBasicAuthLogin(){
 
-    //console.log( 'Logging user: ' + this.username );
-    //console.log( 'With password: ' + this.password);
-    this.basicAuthenticationService.executeAuthenticationService(this.username, this.password).subscribe(
-      data => {
-          console.log( data );
-      this.router.navigate(['welcome', this.username])
-      this.invalidLogin = false
+  //   //console.log( 'Logging user: ' + this.username );
+  //   //console.log( 'With password: ' + this.password);
+  //   this.basicAuthenticationService.executeAuthenticationService(this.username, this.password).subscribe(
+  //     data => {
+  //         console.log( data );
+  //     this.router.navigate(['welcome', this.username])
+  //     this.invalidLogin = false
 
-    },
-        error => {
-          console.log( error )
-          this.invalidLogin = true
-        }
-    )
+  //   },
+  //       error => {
+  //         console.log( error )
+  //         this.invalidLogin = true
+  //       }
+  //   )
       
       
     
-  }
+  // }
 
   
 

@@ -30,9 +30,9 @@ export class TodoComponent implements OnInit {
   }
 
   saveTodo() {
-    if (this.id === -1) {
+    if (this.id == -1) {
       //Create a todo     
-      this.todoService.createTodo('int28minutes', this.todo).subscribe(
+      this.todoService.createTodo('in28minutes', this.todo).subscribe(
         response => {
           console.log(response);
           this.router.navigate(['todos'])
